@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/controller/orders/archive_controller.dart';
 import 'package:ecommerce_app/controller/orders/pending_controller.dart';
 import 'package:ecommerce_app/core/constant/color.dart';
 import 'package:ecommerce_app/core/constant/routes.dart';
@@ -6,9 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
 
-class CardOrdersList extends GetView<OrdersPendingControllerImp> {
+class CardOrdersListArchive extends GetView<OrdersArchiveControllerImp> {
   final OrdersModel listdata;
-  const CardOrdersList({Key? key, required this.listdata}) : super(key: key);
+  const CardOrdersListArchive({Key? key, required this.listdata})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,15 +71,6 @@ class CardOrdersList extends GetView<OrdersPendingControllerImp> {
                 SizedBox(
                   width: 10,
                 ),
-                if (listdata.ordersStatus == "0")
-                  MaterialButton(
-                    onPressed: () {
-                      controller.deleteOrders(listdata.ordersId!);
-                    },
-                    child: const Text("Delete"),
-                    color: AppColor.thirdColor,
-                    textColor: AppColor.secondaryColor,
-                  )
               ],
             ),
           ],

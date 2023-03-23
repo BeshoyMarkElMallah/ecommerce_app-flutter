@@ -1,21 +1,21 @@
 import 'package:ecommerce_app/core/class/statusrequest.dart';
 import 'package:ecommerce_app/core/functions/handlingdataController.dart';
 import 'package:ecommerce_app/core/services/services.dart';
-import 'package:ecommerce_app/data/datasource/remote/orders/pending_data.dart';
+import 'package:ecommerce_app/data/datasource/remote/orders/archive_data.dart';
 import 'package:ecommerce_app/data/model/ordersmodel.dart';
 import 'package:get/get.dart';
 
-abstract class OrdersPendingController extends GetxController {
+abstract class OrdersArchiveController extends GetxController {
   getOrders();
   String printTypeOrders(String val);
   String printPaymentMethod(String val);
   String printOrderStatus(String val);
   refreshOrder();
-  deleteOrders(String orderid);
+  // deleteOrders(String orderid);
 }
 
-class OrdersPendingControllerImp extends OrdersPendingController {
-  PendingData pendingData = PendingData(Get.find());
+class OrdersArchiveControllerImp extends OrdersArchiveController {
+  ArchiveData archiveData = ArchiveData(Get.find());
 
   List<OrdersModel> data = [];
 
@@ -28,7 +28,7 @@ class OrdersPendingControllerImp extends OrdersPendingController {
     data.clear();
     statusRequest = StatusRequest.loading;
     update();
-    var response = await pendingData
+    var response = await archiveData
         .getData(myServices.sharedPreferences.getString("id")!);
     print(response);
     statusRequest = handlingData(response);
@@ -37,25 +37,6 @@ class OrdersPendingControllerImp extends OrdersPendingController {
       if (response['status'] == 'success') {
         List listdata = response['data'];
         data.addAll(listdata.map((e) => OrdersModel.fromJson(e)));
-      } else {
-        statusRequest = StatusRequest.failure;
-      }
-    }
-    update();
-  }
-
-  @override
-  deleteOrders(String orderid) async {
-    data.clear();
-    statusRequest = StatusRequest.loading;
-    update();
-    var response = await pendingData.deleteData(orderid);
-    print(response);
-    statusRequest = handlingData(response);
-
-    if (StatusRequest.success == statusRequest) {
-      if (response['status'] == 'success') {
-        refreshOrder();
       } else {
         statusRequest = StatusRequest.failure;
       }

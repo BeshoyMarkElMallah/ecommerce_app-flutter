@@ -17,7 +17,9 @@ import 'package:ecommerce_app/view/screen/homescreen.dart';
 import 'package:ecommerce_app/view/screen/items.dart';
 import 'package:ecommerce_app/view/screen/language.dart';
 import 'package:ecommerce_app/view/screen/myfavorite.dart';
+import 'package:ecommerce_app/view/screen/offers.dart';
 import 'package:ecommerce_app/view/screen/onboarding.dart';
+import 'package:ecommerce_app/view/screen/orders/archive.dart';
 import 'package:ecommerce_app/view/screen/orders/details.dart';
 import 'package:ecommerce_app/view/screen/orders/pending.dart';
 import 'package:ecommerce_app/view/screen/productdetails.dart';
@@ -60,4 +62,8 @@ List<GetPage> routes = [
   //Order
   GetPage(name: AppRoute.pendingorder, page: () => const OrdersPending()),
   GetPage(name: AppRoute.ordersdetails, page: () => const OrdersDetails()),
+  GetPage(name: AppRoute.archive, page: () => const OrdersArchive()),
+
+  //offers
+  // GetPage(name: AppRoute.offers, page: () => const OffersView()),
 ];

@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/view/screen/home.dart';
 import 'package:ecommerce_app/view/screen/notification.dart';
+import 'package:ecommerce_app/view/screen/offers.dart';
 import 'package:ecommerce_app/view/screen/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,14 +14,7 @@ class HomeScreenControllerImp extends HomeScreenController {
   List<Widget> listPage = [
     const HomePage(),
     const NotificationView(),
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Center(
-          child: Text("Profile"),
-        )
-      ],
-    ),
+    const OffersView(),
     const Settings(),
   ];
 
@@ -33,10 +27,7 @@ class HomeScreenControllerImp extends HomeScreenController {
       "title": "Notifications",
       "icon": Icons.notifications_active_outlined,
     },
-    {
-      "title": "Profile",
-      "icon": Icons.person_pin_sharp,
-    },
+    {"title": "Offers", "icon": Icons.offline_bolt_outlined},
     {
       "title": "Settings",
       "icon": Icons.settings,

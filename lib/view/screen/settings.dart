@@ -4,6 +4,7 @@ import 'package:ecommerce_app/core/constant/imageasset.dart';
 import 'package:ecommerce_app/core/constant/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class Settings extends StatelessWidget {
                 Divider(),
                 ListTile(
                   onTap: () {
-                    Get.toNamed(AppRoute.addressview);
+                    Get.toNamed(AppRoute.archive);
                   },
                   title: Text("Archive"),
                   trailing: Icon(Icons.archive),
@@ -82,7 +83,9 @@ class Settings extends StatelessWidget {
                 ),
                 Divider(),
                 ListTile(
-                  onTap: () {},
+                  onTap: () async {
+                    await launchUrl(Uri.parse("tel:+201278003266"));
+                  },
                   title: Text("Contact us"),
                   trailing: Icon(Icons.phone_callback_rounded),
                 ),
