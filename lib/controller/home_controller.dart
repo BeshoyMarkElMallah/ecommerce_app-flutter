@@ -23,6 +23,7 @@ class HomeControllerImp extends HomeController {
 
   List categories = [];
   List items = [];
+  List settingdata = [];
 
   String? username;
   String? id;
@@ -55,6 +56,7 @@ class HomeControllerImp extends HomeController {
       if (response['status'] == 'success') {
         categories.addAll(response['categories']['data']);
         items.addAll(response['items']['data']);
+        settingdata.addAll(response['settings']['data']);
       } else {
         statusRequest = StatusRequest.failure;
       }

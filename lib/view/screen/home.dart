@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeControllerImp());
+    HomeControllerImp controller = Get.put(HomeControllerImp());
     return GetBuilder<HomeControllerImp>(
       builder: (controller) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -45,14 +45,16 @@ class HomePage extends StatelessWidget {
                 widget: !controller.isSearch
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          CustomCardHome(
-                              title: "A summer surprise", body: "Cashback 20%"),
+                        children: [
+                          if (controller.settingdata.isNotEmpty)
+                            CustomCardHome(
+                                title:
+                                    "${controller.settingdata[0]['settings_title']}",
+                                body:
+                                    "${controller.settingdata[0]['settings_description']}"),
                           CustomTitleHome(title: "Categories"),
                           ListCategoriesHome(),
-                          CustomTitleHome(title: "Product  for you"),
-                          ListItemsHome(),
-                          CustomTitleHome(title: "Offer"),
+                          CustomTitleHome(title: "Top Selling"),
                           ListItemsHome(),
                         ],
                       )
