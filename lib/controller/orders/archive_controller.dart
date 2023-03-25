@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/class/statusrequest.dart';
+import 'package:ecommerce_app/core/constant/routes.dart';
 import 'package:ecommerce_app/core/functions/handlingdataController.dart';
 import 'package:ecommerce_app/core/services/services.dart';
 import 'package:ecommerce_app/data/datasource/remote/orders/archive_data.dart';
@@ -11,6 +12,7 @@ abstract class OrdersArchiveController extends GetxController {
   String printPaymentMethod(String val);
   String printOrderStatus(String val);
   refreshOrder();
+  submitRating(String ordersid, double rating, String comment);
   // deleteOrders(String orderid);
 }
 
@@ -88,5 +90,25 @@ class OrdersArchiveControllerImp extends OrdersArchiveController {
   @override
   refreshOrder() {
     getOrders();
+  }
+
+  @override
+  submitRating(String ordersid, double rating, String comment) async {
+    data.clear();
+    statusRequest = StatusRequest.loading;
+    update();
+    var response =
+        await archiveData.rating(ordersid, comment, rating.toString());
+    print(response);
+    statusRequest = handlingData(response);
+
+    if (StatusRequest.success == statusRequest) {
+      if (response['status'] == 'success') {
+        getOrders();
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+    }
+    update();
   }
 }
